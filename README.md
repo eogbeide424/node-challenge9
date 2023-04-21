@@ -4,10 +4,11 @@
 # Node Challenge 9
 ## Technolgy Used 
 |Javascript  | https://github.com/eogbeide424/node-challenge9/blob/main/index.js| 
-|Walk through link | | 
+|
+Walk through Video link |https://drive.google.com/file/d/1l8vIsBhG2FWF8VOjjoKzjMfRWuhbG2ge/view?usp=sharing | 
 
 ## Description
-
+| Deployed site | https://github.com/eogbeide424/node-challenge9/blob/main/index.js|
  On this assignment we had to build an app that will create a good readme file it had to be quick and easy 
  ![screenshot](./asset/img/Screenshot%202023-04-20%20233546.png)
 
