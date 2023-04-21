@@ -1,11 +1,19 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
-
+const renderLicenseBadge =require('./asset/generateMarkdown');
 
 
 inquirer
   .prompt([
+    {
+        name: "fullName",
+        message: "Enter full name"
+    }, 
+    {
+        name: "date",
+        message: "enter the date"
+    }, 
     {
         name: "projectTitle",
         message: "what is your project titled"
@@ -26,7 +34,7 @@ inquirer
         type: 'checkbox',
         message: 'choose your license',
         name: "license",
-        choices:[`MIT`,`Berkley`,`Github`],
+        choices:[`MIT`,`Boost Software`,`apache`],
     }, 
         
     {
@@ -37,21 +45,23 @@ inquirer
    }, 
 ]).then((responce) => {
     const readMePage= generateReadMe(responce);
+    if(responce.license !== null) {
+        renderLicenseSection(responce.license)
+    }else {
+        return null;
+    }
 
     fs.writeFile('README.md', readMePage, (err) =>
     err ? console.log(err) : console.log('sucess')
     );
 })
-const generateReadMe= (responce) => `
-# ${responce.title}
+const generateReadMe= (responce) => 
+`
+# ${responce.projectTitle}
 
 ## Description
 
-${responce.projectTitle}
-
-If you're new to Markdown, read the GitHub guide on [Mastering Markdown](https://guides.github.com/features/mastering-markdown/).
-
-If you need an example of a good README, check out [the VSCode repository](https://github.com/microsoft/vscode).
+ ${responce.description}
 
 
 ## Table of Contents (Optional)
@@ -66,17 +76,12 @@ If your README is very long, add a table of contents to make it easy for users t
 
 ## Installation
 
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
+${responce.installations}
 
 
 ## Usage 
 
-Provide instructions and examples for use. Include screenshots as needed. 
-
-To add a screenshot, create an assets/images folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
-
-md
-![alt text](assets/images/screenshot.png)
+${responce.usage}
 
 
 
@@ -91,7 +96,7 @@ If you followed tutorials, include links to those here as well.
 
 ## License
 
-The last section of a good README is a license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, use [https://choosealicense.com/](https://choosealicense.com/)
+${responce.license}
 
 
 ---
@@ -102,7 +107,7 @@ The last section of a good README is a license. This lets other developers know 
 
 ![badmath](https://img.shields.io/github/languages/top/nielsenjared/badmath)
 
-Badges aren't _necessary_, per se, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
+${responce.badgeColor}
 
 ## Features
 
