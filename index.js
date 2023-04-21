@@ -13,6 +13,24 @@ let licenseSection = ' ';
 inquirer
   .prompt([
     {
+        type: 'checkbox',
+        message: 'What Technology you used',
+        name: "tech",
+        choices:[`CSS`,`HTML`,`Javascript`],
+    }, 
+    {
+        name: 'email',
+        message: "Enter email"
+    }, 
+    {
+        name: 'walkThrough',
+        message: "Enter Walk Through Link"
+    }, 
+    {
+        name: 'repo',
+        message: "enter repository link"
+    }, 
+    {
         name: "fullName",
         message: "Enter full name"
     }, 
@@ -116,6 +134,8 @@ const generateReadMe= (responce,licenseSection) => {
 
 
 # ${responce.projectTitle}
+|${responce.tech}  | ${responce.repo}| 
+|Walk through link | ${responce.walkThrough}| 
 
 ## Description
 
@@ -145,12 +165,7 @@ ${responce.usage}
 
 ## Credits
 
-List your collaborators, if any, with links to their GitHub profiles.
-
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
-
-If you followed tutorials, include links to those here as well.
-
+${responce.fullName} ${responce.email}
 
 ## License
 
@@ -171,19 +186,8 @@ ${licenseSection}
 
 https://img.shields.io/badge/license-${responce.license}-${responce.badgeColor}
 
-## Features
-
-If your project has a lot of features, consider adding a heading called "Features" and listing them there.
-
-## Contributing
-
-If you created an application or package and would like other developers to contribute it, you will want to add guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own.
-
-## Tests
-
-Go the extra mile and write tests for your application. Then provide examples on how to run them.
-
----
+## Questions
+If any questions on how to use the app you can email me at ${responce.email}
 
 © 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
 `
